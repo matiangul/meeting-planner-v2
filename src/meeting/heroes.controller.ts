@@ -7,6 +7,11 @@ import { HeroesService } from './heroes.service';
   model: {
     type: Hero,
   },
+  validation: {
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    forbidUnknownValues: true,
+  },
 })
 @Controller('heroes')
 export class HeroesController {
