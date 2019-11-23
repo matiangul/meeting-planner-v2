@@ -1,23 +1,32 @@
 {
   "name": "meeting-planner",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "license": "MIT",
+  "description": "meeting planner application aiming to simplify and enrich user experience of creating meetings with family and friends like birthdays, bachelor parties, kayaking trips, skiing and others",
+  "author": "Mateusz Angulski <mateusz@angulski.pl> (https://angulski.pl/)",
+  "license": "UNLICENSED",
+  "private": true,
+  "keywords": [
+    "meeting",
+    "planner",
+    "let's meet",
+    "meet",
+    "DDD",
+    "CRUD"
+  ],
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prebuild": "npx rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "npx prettier --write \"src/**/*.ts\" \"e2e/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "lint": "npx tslint -p tsconfig.json -c tslint.json",
+    "test": "npx tsc --noEmit && npx jest --passWithNoTests",
+    "test:watch": "npx tsc --noEmit && npx jest --passWithNoTests --watch",
+    "test:cov": "npx tsc --noEmit && npx jest --passWithNoTests --coverage",
+    "test:debug": "npx tsc --noEmit && node --inspect-brk -r tsconfig-paths/register -r ts-node/register npx jest --passWithNoTests --runInBand",
+    "test:e2e": "npx tsc --noEmit && npx jest --passWithNoTests --config ./e2e/jest.config.js"
   },
   "dependencies": {
     "@nestjs/common": "^6.7.2",
@@ -35,7 +44,7 @@
     "typeorm": "^0.2.20"
   },
   "devDependencies": {
-    "@nestjs/cli": "^6.9.0",
+    "@nestjs/cli": "^6.12.2",
     "@nestjs/schematics": "^6.7.0",
     "@nestjs/testing": "^6.7.1",
     "@types/express": "^4.17.1",
@@ -50,20 +59,8 @@
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
+    "tslint-config-airbnb-base": "^0.3.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.6.3"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".spec.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "coverageDirectory": "./coverage",
-    "testEnvironment": "node"
   }
 }

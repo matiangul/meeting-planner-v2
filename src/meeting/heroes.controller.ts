@@ -8,9 +8,9 @@ import { HeroesService } from './heroes.service';
     type: Hero,
   },
   validation: {
-    whitelist: true,
     forbidNonWhitelisted: true,
     forbidUnknownValues: true,
+    whitelist: true,
   },
 })
 @Controller('heroes')

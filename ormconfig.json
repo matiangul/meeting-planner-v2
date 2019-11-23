@@ -1,9 +1,9 @@
 {
   "type": "mysql",
-  "host": "localhost",
+  "host": "db",
   "port": 3306,
   "username": "root",
-  "password": "",
+  "password": "letsmeet",
   "database": "meetingplanner",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true
