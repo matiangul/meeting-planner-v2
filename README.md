@@ -5,16 +5,14 @@
 ```
 # build all images
 docker-compose build
+# install deps
+docker-compose run --rm app yarn
 # run all containers as deamons
 docker-compose up
 # kill containers
 docker-compose down
 # work on one time app container
 docker-compose run --rm app bash
-# writes package.json
-node@xxx:/srv/app$ npm init --yes
-# writes package-lock.json
-node@xxx:/srv/app$ npm install
 # install app dependencies
 node@xxx:/srv/app$ npm install --save typescript
 ```

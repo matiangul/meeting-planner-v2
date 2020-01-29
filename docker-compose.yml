@@ -6,15 +6,15 @@ services:
     build:
       context: .
       target: development
+    environment:
+      USE_TEST_DB: 'true'
     # container will run our server through nodeamon
     command: yarn start:dev
     ports:
       - 3000:3000
     # bind cwd with our image workdir /srv/app
     volumes:
-      - .:/srv/app
-      # copy of /srv/app/node_modules in the image, and mount it in the container
-      - app_node_modules:/srv/app/node_modules
+      - .:/srv/app:delegated
     depends_on:
       - db
     restart: always
@@ -27,6 +27,10 @@ services:
       MYSQL_ROOT_PASSWORD: letsmeet
       MYSQL_DATABASE: meetingplanner
     command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3307:3306
+    volumes:
+      - ./utils/test_db.sql:/docker-entrypoint-initdb.d/test_db.sql
     restart: always
     networks:
       - meeting-planner-network
@@ -34,6 +38,3 @@ services:
 networks:
   meeting-planner-network:
     driver: bridge
-
-volumes:
-  app_node_modules:

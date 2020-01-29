@@ -23,10 +23,10 @@
     "start:prod": "node dist/main",
     "lint": "npx tslint -p tsconfig.json -c tslint.json",
     "test": "npx tsc --noEmit && npx jest --passWithNoTests",
-    "test:watch": "npx tsc --noEmit && npx jest --passWithNoTests --watch",
-    "test:cov": "npx tsc --noEmit && npx jest --passWithNoTests --coverage",
-    "test:debug": "npx tsc --noEmit && node --inspect-brk -r tsconfig-paths/register -r ts-node/register npx jest --passWithNoTests --runInBand",
-    "test:e2e": "npx tsc --noEmit && npx jest --passWithNoTests --config ./e2e/jest.config.js"
+    "test:watch": "npx jest --passWithNoTests --watch",
+    "test:cov": "npx jest --passWithNoTests --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register npx jest --passWithNoTests --runInBand",
+    "test:e2e": "DROP_DB=true DB_NAME=test_meetingplanner npx jest --passWithNoTests --config ./e2e/jest.config.js"
   },
   "dependencies": {
     "@nestjs/common": "^6.7.2",
