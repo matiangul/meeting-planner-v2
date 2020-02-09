@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from '../user/user.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+type UUID = string;
 
 @Entity()
 export class Meeting {
@@ -26,6 +27,6 @@ export class Meeting {
   @IsNotEmpty({ always: true })
   @IsString({ always: true })
   @MaxLength(36, { always: true })
-  @ManyToOne(_ => User, { nullable: false, lazy: true })
-  public creator!: User;
+  @Column({ name: 'creator_id', type: 'nvarchar', nullable: false, length: 36 })
+  public creatorId!: UUID;
 }
