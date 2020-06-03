@@ -22,7 +22,7 @@ describe('/meetings', () => {
   it('POST valid body returns 201', async () => {
     await request(app.getHttpServer())
       .post('/meetings')
-      .send({ title: 'super meeting' })
+      .send({ title: 'super meeting', creatorId: 'super man id' })
       .expect(201);
   });
 
@@ -36,14 +36,17 @@ describe('/meetings', () => {
   it('POST valid bulk returns 201', async () => {
     await request(app.getHttpServer())
       .post('/meetings/bulk')
-      .send([{ title: 'super meeting' }, { title: 'spider man' }])
+      .send([
+        { title: 'super meeting', creatorId: 'super man id' },
+        { title: 'spiders meeting', creatorId: 'spider man id' },
+      ])
       .expect(400);
   });
 
   it('POST partly invalid bulk returns 400', async () => {
     await request(app.getHttpServer())
       .post('/meetings/bulk')
-      .send([{ title: 'super meeting' }, { what: 'spider man' }])
+      .send([{ title: 'super meeting', creatorId: 'super man id' }, { what: 'spider man' }])
       .expect(400);
 
     await request(app.getHttpServer())
@@ -62,11 +65,18 @@ describe('/meetings', () => {
 
     await request(app.getHttpServer())
       .post('/meetings')
-      .send({ title: 'super meeting' })
+      .send({ title: 'super meeting', creatorId: 'super man id' })
       .then(res => (id = res.body.id));
 
     await request(app.getHttpServer())
       .get(`/meetings/${id}`)
-      .expect({ title: 'super meeting', id, description: null, imageUrl: null });
+      .expect({
+        adminsIds: [],
+        creatorId: 'super man id',
+        description: null,
+        id,
+        imageUrl: null,
+        title: 'super meeting',
+      });
   });
 });
